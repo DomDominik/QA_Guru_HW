@@ -33,9 +33,15 @@ public class WebPositiveTests {
         $("#submit").click();
 
         $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Dominik Smith"));
+        $(".table-responsive").$(byText("Student Email")).parent().shouldBe();
         $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("7981688899"));
         $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("05 November,2026"));
+        $(".table-responsive").$(byText("Subjects")).parent().shouldBe();
+        $(".table-responsive").$(byText("Hobbies")).parent().shouldBe();
+        $(".table-responsive").$(byText("Picture")).parent().shouldBe();
+        $(".table-responsive").$(byText("Address")).parent().shouldBe();
+        $(".table-responsive").$(byText("State and City")).parent().shouldBe();
     }
     @Test
     void successFullFormTests() {
