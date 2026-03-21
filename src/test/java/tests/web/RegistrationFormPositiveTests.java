@@ -10,16 +10,9 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static tests.data.Variables.*;
 
 public class RegistrationFormPositiveTests {
-    String firstName = "Dominik";
-    String lastName = "Smith";
-    String userEmail = "dominik@gmail.com";
-    String genterWrapper = "Male";
-    String userNumber = "7981688899";
-
-    String currentAddress = "Академическая 3";
-
 
     @BeforeAll
     static void setUp() {
@@ -37,10 +30,10 @@ public class RegistrationFormPositiveTests {
 
         $("#submit").click();
 
-        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Dominik Smith"));
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(firstName+" "+lastName));
         $(".table-responsive").$(byText("Student Email")).parent().shouldBe();
-        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
-        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("7981688899"));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(genterWrapper));
+        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(userNumber));
         $(".table-responsive").$(byText("Date of Birth")).parent().shouldBe();
         $(".table-responsive").$(byText("Subjects")).parent().shouldBe();
         $(".table-responsive").$(byText("Hobbies")).parent().shouldBe();
@@ -58,31 +51,31 @@ public class RegistrationFormPositiveTests {
         $("#userNumber").setValue(userNumber);
         // input с датой
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").selectOption("2026");// Выбираем год
-        $(".react-datepicker__month-select").selectOption("November");// Выбираем месяц
+        $(".react-datepicker__year-select").selectOption(yearOfBirth);// Выбираем год
+        $(".react-datepicker__month-select").selectOption(monthOfBirth);// Выбираем месяц
         $(".react-datepicker__day.react-datepicker__day--005").click();// Выбираем день
         //
-        $("#subjectsInput").setValue("Chemistry").pressEnter();
-        $("#hobbiesWrapper").$(byText("Sports")).click();
-        $("#hobbiesWrapper").$(byText("Reading")).click();
+        $("#subjectsInput").setValue(subjects).pressEnter();
+        $("#hobbiesWrapper").$(byText(hobbiesSports)).click();
+        $("#hobbiesWrapper").$(byText(hobbiesReading)).click();
         // загрузка файла
-        $("#uploadPicture").uploadFromClasspath("kartina-edvard-hopper.jpg");
+        $("#uploadPicture").uploadFromClasspath(nameOfFile);
         //
         $("#currentAddress").setValue(currentAddress);
-        $("#react-select-3-input").setValue("Haryana").pressEnter();
-        $("#react-select-4-input").setValue("Karnal").pressEnter();
+        $("#react-select-3-input").setValue(country).pressEnter();
+        $("#react-select-4-input").setValue(city).pressEnter();
         $("#submit").click();
 
-        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Dominik Smith"));
-        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text("dominik@gmail.com"));
-        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
-        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("7981688899"));
-        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("05 November,2026"));
-        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("Chemistry"));
-        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Sports, Reading"));
-        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("kartina-edvard-hopper.jpg"));
-        $(".table-responsive").$(byText("Address")).parent().shouldHave(text("Академическая 3"));
-        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("Haryana Karnal"));
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(firstName+" "+lastName));
+        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text(userEmail));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(genterWrapper));
+        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(userNumber));
+        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("05"+" "+monthOfBirth+","+yearOfBirth));
+        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text(subjects));
+        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text(hobbiesSports+", "+hobbiesReading));
+        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text(nameOfFile));
+        $(".table-responsive").$(byText("Address")).parent().shouldHave(text(currentAddress));
+        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text(country+" "+city));
     }
     @AfterAll
     static void teaDown() {

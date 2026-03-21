@@ -11,6 +11,8 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static tests.data.Variables.*;
+import static tests.data.Variables.userNumber;
 
 public class RegistrationFormNegativeTests {
 
@@ -27,15 +29,10 @@ public class RegistrationFormNegativeTests {
         @Test
         void successMissingRequiredFirstNameTests() {
             open("automation-practice-form");
-            $("#lastName").setValue("Smith");
-            $("#genterWrapper").$(byText("Male")).click();
-            $("#userNumber").setValue("7981688899");
-            // input с датой
-            $("#dateOfBirthInput").click();
-            $(".react-datepicker__year-select").selectOption("2026");// Выбираем год
-            $(".react-datepicker__month-select").selectOption("November");// Выбираем месяц
-            $(".react-datepicker__day.react-datepicker__day--005").click();// Выбираем день
-            //
+            $("#lastName").setValue(lastName);
+            $("#genterWrapper").$(byText(genterWrapper)).click();
+            $("#userNumber").setValue(userNumber);
+
             $("#submit").click();
 
             $("#example-modal-sizes-title-lg").shouldNotBe(visible);
@@ -44,15 +41,10 @@ public class RegistrationFormNegativeTests {
         @Test
         void successMissingRequiredLastNameTests() {
             open("automation-practice-form");
-            $("#firstName").setValue("Dominik");
-            $("#genterWrapper").$(byText("Male")).click();
-            $("#userNumber").setValue("7981688899");
-            // input с датой
-            $("#dateOfBirthInput").click();
-            $(".react-datepicker__year-select").selectOption("2026");// Выбираем год
-            $(".react-datepicker__month-select").selectOption("November");// Выбираем месяц
-            $(".react-datepicker__day.react-datepicker__day--005").click();// Выбираем день
-            //
+            $("#firstName").setValue(firstName);
+            $("#genterWrapper").$(byText(genterWrapper)).click();
+            $("#userNumber").setValue(userNumber);
+
             $("#submit").click();
 
             $("#example-modal-sizes-title-lg").shouldNotBe(visible);
@@ -61,15 +53,10 @@ public class RegistrationFormNegativeTests {
         @Test
         void successMissingRequiredGenterWrapperTests() {
             open("automation-practice-form");
-            $("#firstName").setValue("Dominik");
-            $("#lastName").setValue("Smith");
-            $("#userNumber").setValue("7981688899");
-            // input с датой
-            $("#dateOfBirthInput").click();
-            $(".react-datepicker__year-select").selectOption("2026");// Выбираем год
-            $(".react-datepicker__month-select").selectOption("November");// Выбираем месяц
-            $(".react-datepicker__day.react-datepicker__day--005").click();// Выбираем день
-            //
+            $("#firstName").setValue(firstName);
+            $("#lastName").setValue(lastName);
+            $("#userNumber").setValue(userNumber);
+
             $("#submit").click();
 
             $("#example-modal-sizes-title-lg").shouldNotBe(visible);
@@ -78,15 +65,10 @@ public class RegistrationFormNegativeTests {
         @Test
         void successMissingRequiredUserNumberTests() {
             open("automation-practice-form");
-            $("#firstName").setValue("Dominik");
-            $("#lastName").setValue("Smith");
-            $("#genterWrapper").$(byText("Male")).click();
-            // input с датой
-            $("#dateOfBirthInput").click();
-            $(".react-datepicker__year-select").selectOption("2026");// Выбираем год
-            $(".react-datepicker__month-select").selectOption("November");// Выбираем месяц
-            $(".react-datepicker__day.react-datepicker__day--005").click();// Выбираем день
-            //
+            $("#firstName").setValue(firstName);
+            $("#lastName").setValue(lastName);
+            $("#genterWrapper").$(byText(genterWrapper)).click();
+
             $("#submit").click();
 
             $("#example-modal-sizes-title-lg").shouldNotBe(visible);
