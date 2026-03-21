@@ -1,3 +1,5 @@
+package tests.web;
+
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterAll;
@@ -10,7 +12,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class WebNegativeTests {
+public class RegistrationFormNegativeTests {
 
     @Nested
     class webRequiredFormTests {

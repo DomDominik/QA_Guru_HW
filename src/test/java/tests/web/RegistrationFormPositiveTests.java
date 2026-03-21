@@ -1,3 +1,5 @@
+package tests.web;
+
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterAll;
@@ -9,7 +11,15 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class WebPositiveTests {
+public class RegistrationFormPositiveTests {
+    String firstName = "Dominik";
+    String lastName = "Smith";
+    String userEmail = "dominik@gmail.com";
+    String genterWrapper = "Male";
+    String userNumber = "7981688899";
+
+    String currentAddress = "Академическая 3";
+
 
     @BeforeAll
     static void setUp() {
@@ -20,23 +30,18 @@ public class WebPositiveTests {
     @Test
     void successRequiredFormTests() {
         open("automation-practice-form");
-        $("#firstName").setValue("Dominik");
-        $("#lastName").setValue("Smith");
-        $("#genterWrapper").$(byText("Male")).click();
-        $("#userNumber").setValue("7981688899");
-        // input с датой
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").selectOption("2026");// Выбираем год
-        $(".react-datepicker__month-select").selectOption("November");// Выбираем месяц
-        $(".react-datepicker__day.react-datepicker__day--005").click();// Выбираем день
-        //
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#genterWrapper").$(byText(genterWrapper)).click();
+        $("#userNumber").setValue(userNumber);
+
         $("#submit").click();
 
         $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Dominik Smith"));
         $(".table-responsive").$(byText("Student Email")).parent().shouldBe();
         $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("7981688899"));
-        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("05 November,2026"));
+        $(".table-responsive").$(byText("Date of Birth")).parent().shouldBe();
         $(".table-responsive").$(byText("Subjects")).parent().shouldBe();
         $(".table-responsive").$(byText("Hobbies")).parent().shouldBe();
         $(".table-responsive").$(byText("Picture")).parent().shouldBe();
@@ -46,11 +51,11 @@ public class WebPositiveTests {
     @Test
     void successFullFormTests() {
         open("automation-practice-form");
-        $("#firstName").setValue("Dominik");
-        $("#lastName").setValue("Smith");
-        $("#userEmail").setValue("dominik@gmail.com");
-        $("#genterWrapper").$(byText("Male")).click();
-        $("#userNumber").setValue("7981688899");
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(userEmail);
+        $("#genterWrapper").$(byText(genterWrapper)).click();
+        $("#userNumber").setValue(userNumber);
         // input с датой
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOption("2026");// Выбираем год
@@ -63,7 +68,7 @@ public class WebPositiveTests {
         // загрузка файла
         $("#uploadPicture").uploadFromClasspath("kartina-edvard-hopper.jpg");
         //
-        $("#currentAddress").setValue("Академическая 3");
+        $("#currentAddress").setValue(currentAddress);
         $("#react-select-3-input").setValue("Haryana").pressEnter();
         $("#react-select-4-input").setValue("Karnal").pressEnter();
         $("#submit").click();
