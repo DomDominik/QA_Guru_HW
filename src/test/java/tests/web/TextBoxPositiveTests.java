@@ -5,13 +5,12 @@ import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import tests.pages.TexBoxPage;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 import static tests.data.Variables.*;
 
 public class TextBoxPositiveTests {
+    TexBoxPage texBoxPage = new TexBoxPage();
 
     @BeforeAll
     static void setUp() {
@@ -20,19 +19,19 @@ public class TextBoxPositiveTests {
         Configuration.baseUrl = "https://demoqa.com/";
     }
     @Test
-    void successRequiredFormTests() {
-        open("text-box");
-        $("#userName").setValue(firstName+" "+lastName);
-        $("#userEmail").setValue(userEmail);
-        $("#currentAddress").setValue(currentAddress);
-        $("#permanentAddress").setValue(permanentAddress);
+    void successRequiredFormTests_dsl() {
+        texBoxPage
+                .openPege()
+                .typeUserName(firstName+" "+lastName)
+                .typUserEmail(userEmail)
+                .typCurrentAddress(currentAddress)
+                .typPermanentAddress(permanentAddress)
+                .submitForm()
 
-        $("#submit").click();
-
-        $("#output #name").shouldHave(text(firstName+" "+lastName));
-        $("#output #email").shouldHave(text(userEmail));
-        $("#output #currentAddress").shouldHave(text(currentAddress));
-        $("#output #permanentAddress").shouldHave(text(permanentAddress));
+                .checkField("name", firstName+" "+lastName)
+                .checkField("email", userEmail)
+                .checkField("currentAddress", currentAddress)
+                .checkField("permanentAddress", permanentAddress);
     }
     @AfterAll
     static void teaDown() {
