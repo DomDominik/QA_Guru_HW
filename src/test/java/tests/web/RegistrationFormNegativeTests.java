@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import tests.pages.RegistrationPage;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -18,6 +19,7 @@ public class RegistrationFormNegativeTests {
 
     @Nested
     class webRequiredFormTests {
+        RegistrationPage registrationPage = new RegistrationPage();
 
         @BeforeAll
         static void setUp() {
@@ -28,50 +30,50 @@ public class RegistrationFormNegativeTests {
 
         @Test
         void successMissingRequiredFirstNameTests() {
-            open("automation-practice-form");
-            $("#lastName").setValue(lastName);
-            $("#genterWrapper").$(byText(genterWrapper)).click();
-            $("#userNumber").setValue(userNumber);
+            registrationPage
+                    .openPege()
+                    .typeLastName(lastName)
+                    .typeGenterWrapper(genterWrapper)
+                    .typeUserNumber(userNumber)
+                    .submitForm()
 
-            $("#submit").click();
-
-            $("#example-modal-sizes-title-lg").shouldNotBe(visible);
+                    .checkNotVisibleTableResponsive();
         }
 
         @Test
         void successMissingRequiredLastNameTests() {
-            open("automation-practice-form");
-            $("#firstName").setValue(firstName);
-            $("#genterWrapper").$(byText(genterWrapper)).click();
-            $("#userNumber").setValue(userNumber);
+            registrationPage
+                    .openPege()
+                    .typeFirstName(firstName)
+                    .typeGenterWrapper(genterWrapper)
+                    .typeUserNumber(userNumber)
+                    .submitForm()
 
-            $("#submit").click();
-
-            $("#example-modal-sizes-title-lg").shouldNotBe(visible);
+                    .checkNotVisibleTableResponsive();
         }
 
         @Test
         void successMissingRequiredGenterWrapperTests() {
-            open("automation-practice-form");
-            $("#firstName").setValue(firstName);
-            $("#lastName").setValue(lastName);
-            $("#userNumber").setValue(userNumber);
+            registrationPage
+                    .openPege()
+                    .typeFirstName(firstName)
+                    .typeLastName(lastName)
+                    .typeUserNumber(userNumber)
+                    .submitForm()
 
-            $("#submit").click();
-
-            $("#example-modal-sizes-title-lg").shouldNotBe(visible);
+                    .checkNotVisibleTableResponsive();
         }
 
         @Test
         void successMissingRequiredUserNumberTests() {
-            open("automation-practice-form");
-            $("#firstName").setValue(firstName);
-            $("#lastName").setValue(lastName);
-            $("#genterWrapper").$(byText(genterWrapper)).click();
+            registrationPage
+                    .openPege()
+                    .typeFirstName(firstName)
+                    .typeLastName(lastName)
+                    .typeGenterWrapper(genterWrapper)
+                    .submitForm()
 
-            $("#submit").click();
-
-            $("#example-modal-sizes-title-lg").shouldNotBe(visible);
+                    .checkNotVisibleTableResponsive();
         }
 
         @AfterAll
