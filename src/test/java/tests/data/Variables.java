@@ -10,6 +10,7 @@ public class Variables {
             userNumber = "7981688899",
             yearOfBirth = "2026",
             monthOfBirth = "November",
+            dayOfBirth = "05",
             subjects = "Chemistry",
             hobbiesSports = "Sports",
             hobbiesReading = "Reading",
