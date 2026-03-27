@@ -7,7 +7,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import tests.pages.TexBoxPage;
 
-import static tests.data.Variables.*;
+import static tests.data.RandomizTestData.*;
+import static tests.data.TestData.*;
 
 public class TextBoxPositiveTests {
     TexBoxPage texBoxPage = new TexBoxPage();
@@ -19,7 +20,7 @@ public class TextBoxPositiveTests {
         Configuration.baseUrl = "https://demoqa.com/";
     }
     @Test
-    void successRequiredFormTests_dsl() {
+    void successRequiredFormTests() {
         texBoxPage
                 .openPege()
                 .typeUserName(firstName+" "+lastName)
@@ -32,6 +33,21 @@ public class TextBoxPositiveTests {
                 .checkField("email", userEmail)
                 .checkField("currentAddress", currentAddress)
                 .checkField("permanentAddress", permanentAddress);
+    }
+    @Test
+    void successRandomRequiredFormTests() {
+        texBoxPage
+                .openPege()
+                .typeUserName(firstRandomName+" "+lastRandomName)
+                .typUserEmail(userRandomEmail)
+                .typCurrentAddress(currentAddressRandom)
+                .typPermanentAddress(permanentAddressRandom)
+                .submitForm()
+
+                .checkField("name", firstRandomName+" "+lastRandomName)
+                .checkField("email", userRandomEmail)
+                .checkField("currentAddress", currentAddressRandom)
+                .checkField("permanentAddress", permanentAddressRandom);
     }
     @AfterAll
     static void teaDown() {

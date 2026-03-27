@@ -1,13 +1,13 @@
 package tests.data;
 
-public class Variables {
+public class TestData {
 
     public static String
             firstName = "Dominik",
-            lastName = "Smith",
-            userEmail = "dominik@gmail.com",
+            lastName = "Torrento",
+            userEmail = "DomDominikas@mail.com",
             genterWrapper = "Male",
-            userNumber = "7981688899",
+            userNumber = "7981688888",
             yearOfBirth = "2026",
             monthOfBirth = "November",
             dayOfBirth = "05",

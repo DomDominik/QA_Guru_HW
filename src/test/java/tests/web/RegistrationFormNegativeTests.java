@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import tests.pages.RegistrationPage;
 
-import static tests.data.Variables.*;
-import static tests.data.Variables.userNumber;
+import static tests.data.TestData.*;
 
 public class RegistrationFormNegativeTests {
 

@@ -7,7 +7,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import tests.pages.RegistrationPage;
 
-import static tests.data.Variables.*;
+import static tests.data.RandomizTestData.*;
+import static tests.data.TestData.*;
 
 public class RegistrationFormPositiveTests {
     RegistrationPage registrationPage = new RegistrationPage();
@@ -20,6 +21,7 @@ public class RegistrationFormPositiveTests {
     }
     @Test
     void successRequiredFormTests() {
+
         registrationPage
                 .openPege()
                 .typeFirstName(firstName)
@@ -70,6 +72,33 @@ public class RegistrationFormPositiveTests {
                 .checkResult("Picture", nameOfFile)
                 .checkResult("Address", currentAddress)
                 .checkResult("State and City", country+" "+city);
+    }
+    @Test    void successFullFormRandomizTests() {
+        registrationPage
+                .openPege()
+                .typeFirstName(firstRandomName)
+                .typeLastName(lastRandomName)
+                .typeUserEmail(userRandomEmail)
+                .typeGenterWrapper(genterRandomWrapper)
+                .typeUserNumber(userRandomNumber)
+                .typeDateOfBirth(monthOfBirthRandom, yearOfBirthRandom, dayOfBirthRandom) //Работа с календарем
+                .typeSubjectsInput(subjectsRandom)
+                .typeHobbiesRadioButton(hobbiesRandom)
+                .typeCurrentAddress(currentAddressRandom)
+                .typeCountrySelect(countryRandom)
+                .typeCitySelect(cityRandom)
+                .submitForm()
+
+                .checkVisibleTableResponsive()
+                .checkResult("Student Name", firstRandomName+" "+lastRandomName)
+                .checkResult("Student Email", userRandomEmail)
+                .checkResult("Gender", genterRandomWrapper)
+                .checkResult("Mobile", userRandomNumber)
+                .checkResult("Date of Birth", dayOfBirthRandom+" "+monthOfBirthRandom+","+yearOfBirthRandom)
+                .checkResult("Subjects", subjectsRandom)
+                .checkResult("Hobbies", hobbiesRandom)
+                .checkResult("Address", currentAddressRandom)
+                .checkResult("State and City", countryRandom+" "+cityRandom);
     }
     @AfterAll
     static void teaDown() {
