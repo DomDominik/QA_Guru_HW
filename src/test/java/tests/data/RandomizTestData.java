@@ -8,7 +8,7 @@ import java.util.Locale;
 
 public class RandomizTestData {
 
-    public static String
+    public String
             firstRandomName,
             lastRandomName,
             userRandomEmail,
@@ -24,7 +24,7 @@ public class RandomizTestData {
             countryRandom,
             cityRandom;
 
-    static {
+    public RandomizTestData() {
         Faker faker = new Faker(Locale.of("en"));
         String[] birthDate = RandomUtils.generateBirthDate();
         CountryAndCity countryAndCity = faker.options().nextElement(CountryAndCity.values());

@@ -4,14 +4,16 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tests.data.RandomizTestData;
 import tests.pages.RegistrationPage;
 
-import static tests.data.RandomizTestData.*;
 import static tests.data.TestData.*;
 
 public class RegistrationFormPositiveTests {
     RegistrationPage registrationPage = new RegistrationPage();
+    private RandomizTestData randomData;
 
     @BeforeAll
     static void setUp() {
@@ -73,32 +75,40 @@ public class RegistrationFormPositiveTests {
                 .checkResult("Address", currentAddress)
                 .checkResult("State and City", country+" "+city);
     }
+    @BeforeEach
+    public void setRandomDataUp() {
+        randomData = new RandomizTestData();
+    }
     @Test    void successFullFormRandomizTests() {
         registrationPage
                 .openPege()
-                .typeFirstName(firstRandomName)
-                .typeLastName(lastRandomName)
-                .typeUserEmail(userRandomEmail)
-                .typeGenterWrapper(genterRandomWrapper)
-                .typeUserNumber(userRandomNumber)
-                .typeDateOfBirth(monthOfBirthRandom, yearOfBirthRandom, dayOfBirthRandom) //Работа с календарем
-                .typeSubjectsInput(subjectsRandom)
-                .typeHobbiesRadioButton(hobbiesRandom)
-                .typeCurrentAddress(currentAddressRandom)
-                .typeCountrySelect(countryRandom)
-                .typeCitySelect(cityRandom)
+                .typeFirstName(randomData.firstRandomName)
+                .typeLastName(randomData.lastRandomName)
+                .typeUserEmail(randomData.userRandomEmail)
+                .typeGenterWrapper(randomData.genterRandomWrapper)
+                .typeUserNumber(randomData.userRandomNumber)
+                .typeDateOfBirth(randomData.monthOfBirthRandom,
+                        randomData.yearOfBirthRandom,
+                        randomData.dayOfBirthRandom) //Работа с календарем
+                .typeSubjectsInput(randomData.subjectsRandom)
+                .typeHobbiesRadioButton(randomData.hobbiesRandom)
+                .typeCurrentAddress(randomData.currentAddressRandom)
+                .typeCountrySelect(randomData.countryRandom)
+                .typeCitySelect(randomData.cityRandom)
                 .submitForm()
 
                 .checkVisibleTableResponsive()
-                .checkResult("Student Name", firstRandomName+" "+lastRandomName)
-                .checkResult("Student Email", userRandomEmail)
-                .checkResult("Gender", genterRandomWrapper)
-                .checkResult("Mobile", userRandomNumber)
-                .checkResult("Date of Birth", dayOfBirthRandom+" "+monthOfBirthRandom+","+yearOfBirthRandom)
-                .checkResult("Subjects", subjectsRandom)
-                .checkResult("Hobbies", hobbiesRandom)
-                .checkResult("Address", currentAddressRandom)
-                .checkResult("State and City", countryRandom+" "+cityRandom);
+                .checkResult("Student Name", randomData.firstRandomName+
+                        " "+ randomData.lastRandomName)
+                .checkResult("Student Email", randomData.userRandomEmail)
+                .checkResult("Gender", randomData.genterRandomWrapper)
+                .checkResult("Mobile", randomData.userRandomNumber)
+                .checkResult("Date of Birth", randomData.dayOfBirthRandom+
+                        " "+ randomData.monthOfBirthRandom+ "," + randomData.yearOfBirthRandom)
+                .checkResult("Subjects", randomData.subjectsRandom)
+                .checkResult("Hobbies", randomData.hobbiesRandom)
+                .checkResult("Address", randomData.currentAddressRandom)
+                .checkResult("State and City", randomData.countryRandom+" "+randomData.cityRandom);
     }
     @AfterAll
     static void teaDown() {
