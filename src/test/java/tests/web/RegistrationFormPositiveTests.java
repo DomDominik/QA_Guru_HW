@@ -15,17 +15,20 @@ public class RegistrationFormPositiveTests {
     RegistrationPage registrationPage = new RegistrationPage();
     private RandomizTestData randomData;
 
+
     @BeforeAll
     static void setUp() {
         Configuration.browserSize = "1920x1080";
         Configuration.browser = "chrome";
         Configuration.baseUrl = "https://demoqa.com/";
+
     }
     @Test
     void successRequiredFormTests() {
 
         registrationPage
                 .openPege()
+                .removeBanner()
                 .typeFirstName(firstName)
                 .typeLastName(lastName)
                 .typeGenterWrapper(genterWrapper)
@@ -48,6 +51,7 @@ public class RegistrationFormPositiveTests {
     void successFullFormTests() {
         registrationPage
                 .openPege()
+                .removeBanner()
                 .typeFirstName(firstName)
                 .typeLastName(lastName)
                 .typeUserEmail(userEmail)
@@ -82,6 +86,7 @@ public class RegistrationFormPositiveTests {
     @Test    void successFullFormRandomizTests() {
         registrationPage
                 .openPege()
+                .removeBanner()
                 .typeFirstName(randomData.firstRandomName)
                 .typeLastName(randomData.lastRandomName)
                 .typeUserEmail(randomData.userRandomEmail)
