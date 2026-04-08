@@ -1,6 +1,7 @@
 package tests.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import tests.data.utils.RemoveBannerUtils;
 import tests.pages.components.CalendarComponent;
 import tests.pages.components.ModalResultComponent;
 
@@ -121,6 +122,11 @@ public class RegistrationPage {
     }
     public RegistrationPage checkEmptyResult (String label) {
         modalResultComponent.checkEmptyTableResponsive(label);
+
+        return this;
+    }
+    public RegistrationPage removeBanner () {
+        RemoveBannerUtils.removeAdElements();
 
         return this;
     }

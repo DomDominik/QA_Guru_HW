@@ -27,6 +27,7 @@ public class RegistrationFormNegativeTests {
         void successMissingRequiredFirstNameTests() {
             registrationPage
                     .openPege()
+                    .removeBanner()
                     .typeLastName(lastName)
                     .typeGenterWrapper(genterWrapper)
                     .typeUserNumber(userNumber)
@@ -39,6 +40,7 @@ public class RegistrationFormNegativeTests {
         void successMissingRequiredLastNameTests() {
             registrationPage
                     .openPege()
+                    .removeBanner()
                     .typeFirstName(firstName)
                     .typeGenterWrapper(genterWrapper)
                     .typeUserNumber(userNumber)
@@ -51,6 +53,7 @@ public class RegistrationFormNegativeTests {
         void successMissingRequiredGenterWrapperTests() {
             registrationPage
                     .openPege()
+                    .removeBanner()
                     .typeFirstName(firstName)
                     .typeLastName(lastName)
                     .typeUserNumber(userNumber)
@@ -63,6 +66,7 @@ public class RegistrationFormNegativeTests {
         void successMissingRequiredUserNumberTests() {
             registrationPage
                     .openPege()
+                    .removeBanner()
                     .typeFirstName(firstName)
                     .typeLastName(lastName)
                     .typeGenterWrapper(genterWrapper)

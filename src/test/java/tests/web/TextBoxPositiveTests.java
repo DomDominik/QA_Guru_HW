@@ -4,20 +4,23 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tests.data.RandomizTestData;
 import tests.pages.TexBoxPage;
 
-import static tests.data.RandomizTestData.*;
 import static tests.data.TestData.*;
 
 public class TextBoxPositiveTests {
     TexBoxPage texBoxPage = new TexBoxPage();
+    private RandomizTestData randomData;
 
     @BeforeAll
     static void setUp() {
         Configuration.browserSize = "1920x1080";
         Configuration.browser = "chrome";
         Configuration.baseUrl = "https://demoqa.com/";
+
     }
     @Test
     void successRequiredFormTests() {
@@ -34,20 +37,24 @@ public class TextBoxPositiveTests {
                 .checkField("currentAddress", currentAddress)
                 .checkField("permanentAddress", permanentAddress);
     }
+    @BeforeEach
+    public void setRandomDataUp() {
+        randomData = new RandomizTestData();
+    }
     @Test
     void successRandomRequiredFormTests() {
         texBoxPage
                 .openPege()
-                .typeUserName(firstRandomName+" "+lastRandomName)
-                .typUserEmail(userRandomEmail)
-                .typCurrentAddress(currentAddressRandom)
-                .typPermanentAddress(permanentAddressRandom)
+                .typeUserName(randomData.firstRandomName+" "+randomData.lastRandomName)
+                .typUserEmail(randomData.userRandomEmail)
+                .typCurrentAddress(randomData.currentAddressRandom)
+                .typPermanentAddress(randomData.permanentAddressRandom)
                 .submitForm()
 
-                .checkField("name", firstRandomName+" "+lastRandomName)
-                .checkField("email", userRandomEmail)
-                .checkField("currentAddress", currentAddressRandom)
-                .checkField("permanentAddress", permanentAddressRandom);
+                .checkField("name", randomData.firstRandomName+" "+randomData.lastRandomName)
+                .checkField("email", randomData.userRandomEmail)
+                .checkField("currentAddress", randomData.currentAddressRandom)
+                .checkField("permanentAddress", randomData.permanentAddressRandom);
     }
     @AfterAll
     static void teaDown() {
