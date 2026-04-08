@@ -1,7 +1,7 @@
 package tests.data;
 
 import com.github.javafaker.Faker;
-import tests.data.utils.RandomUtils;
+import tests.data.utils.DateFormatter;
 
 import java.util.Locale;
 
@@ -26,7 +26,7 @@ public class RandomizTestData {
 
     public RandomizTestData() {
         Faker faker = new Faker(Locale.of("en"));
-        String[] birthDate = RandomUtils.generateBirthDate();
+        String[] birthDate = DateFormatter.generateBirthDate();
         CountryAndCity countryAndCity = faker.options().nextElement(CountryAndCity.values());
 
 
