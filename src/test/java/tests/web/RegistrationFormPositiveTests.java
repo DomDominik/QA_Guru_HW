@@ -2,10 +2,7 @@ package tests.web;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import tests.data.RandomizTestData;
 import tests.pages.RegistrationPage;
 
@@ -24,6 +21,7 @@ public class RegistrationFormPositiveTests {
 
     }
     @Test
+    @DisplayName("Тест на большую форму регистрации -> заданные данные -> обязательные поля")
     void successRequiredFormTests() {
 
         registrationPage
@@ -31,7 +29,7 @@ public class RegistrationFormPositiveTests {
                 .removeBanner()
                 .typeFirstName(firstName)
                 .typeLastName(lastName)
-                .typeGenterWrapper(genterWrapper)
+                .typeGenderWrapper(genterWrapper)
                 .typeUserNumber(userNumber)
                 .submitForm()
 
@@ -48,6 +46,7 @@ public class RegistrationFormPositiveTests {
                 .checkEmptyResult("State and City");
     }
     @Test
+    @DisplayName("Тест на большую форму регистрации -> заданные данные -> все поля")
     void successFullFormTests() {
         registrationPage
                 .openPege()
@@ -55,7 +54,7 @@ public class RegistrationFormPositiveTests {
                 .typeFirstName(firstName)
                 .typeLastName(lastName)
                 .typeUserEmail(userEmail)
-                .typeGenterWrapper(genterWrapper)
+                .typeGenderWrapper(genterWrapper)
                 .typeUserNumber(userNumber)
                 .typeDateOfBirth(monthOfBirth, yearOfBirth, dayOfBirth) //Работа с календарем
                 .typeSubjectsInput(subjects)
@@ -83,14 +82,16 @@ public class RegistrationFormPositiveTests {
     public void setRandomDataUp() {
         randomData = new RandomizTestData();
     }
-    @Test    void successFullFormRandomizTests() {
+    @Test
+    @DisplayName("Тест на большую форму регистрации -> рандомные данные -> все поля")
+    void successFullFormRandomizTests() {
         registrationPage
                 .openPege()
                 .removeBanner()
                 .typeFirstName(randomData.firstRandomName)
                 .typeLastName(randomData.lastRandomName)
                 .typeUserEmail(randomData.userRandomEmail)
-                .typeGenterWrapper(randomData.genterRandomWrapper)
+                .typeGenderWrapper(randomData.genterRandomWrapper)
                 .typeUserNumber(randomData.userRandomNumber)
                 .typeDateOfBirth(randomData.monthOfBirthRandom,
                         randomData.yearOfBirthRandom,
