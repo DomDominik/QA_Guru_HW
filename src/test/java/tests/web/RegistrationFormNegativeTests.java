@@ -2,10 +2,7 @@ package tests.web;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import tests.pages.RegistrationPage;
 
 import static tests.data.TestData.*;
@@ -24,12 +21,13 @@ public class RegistrationFormNegativeTests {
         }
 
         @Test
+        @DisplayName("Тест на большую форму регистрации -> обязательность полей -> без firstName")
         void successMissingRequiredFirstNameTests() {
             registrationPage
                     .openPege()
                     .removeBanner()
                     .typeLastName(lastName)
-                    .typeGenterWrapper(genterWrapper)
+                    .typeGenderWrapper(genterWrapper)
                     .typeUserNumber(userNumber)
                     .submitForm()
 
@@ -37,12 +35,13 @@ public class RegistrationFormNegativeTests {
         }
 
         @Test
+        @DisplayName("Тест на большую форму регистрации -> обязательность полей -> без lastName")
         void successMissingRequiredLastNameTests() {
             registrationPage
                     .openPege()
                     .removeBanner()
                     .typeFirstName(firstName)
-                    .typeGenterWrapper(genterWrapper)
+                    .typeGenderWrapper(genterWrapper)
                     .typeUserNumber(userNumber)
                     .submitForm()
 
@@ -50,6 +49,7 @@ public class RegistrationFormNegativeTests {
         }
 
         @Test
+        @DisplayName("Тест на большую форму регистрации -> обязательность полей -> без genterWrapper")
         void successMissingRequiredGenterWrapperTests() {
             registrationPage
                     .openPege()
@@ -63,13 +63,14 @@ public class RegistrationFormNegativeTests {
         }
 
         @Test
+        @DisplayName("Тест на большую форму регистрации -> обязательность полей -> без userNumber")
         void successMissingRequiredUserNumberTests() {
             registrationPage
                     .openPege()
                     .removeBanner()
                     .typeFirstName(firstName)
                     .typeLastName(lastName)
-                    .typeGenterWrapper(genterWrapper)
+                    .typeGenderWrapper(genterWrapper)
                     .submitForm()
 
                     .checkNotVisibleTableResponsive();

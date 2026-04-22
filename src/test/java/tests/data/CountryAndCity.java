@@ -23,4 +23,7 @@ public enum CountryAndCity {
     public String getRandomCity(Faker faker) {
         return faker.options().nextElement(cities);
     }
+    public String[] getCities() {
+        return cities;
+    }
 }

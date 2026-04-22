@@ -53,9 +53,15 @@ public class RegistrationPage {
 
         return  this;
     }
-    public RegistrationPage typeGenterWrapper (String value) {
+    public RegistrationPage typeGenderWrapper (String value) {
         genterContainer.$(byText(value)).click();
 
+        return  this;
+    }
+    public RegistrationPage genderWrapperParametrized (String value) {
+        if (value != null && !value.isEmpty()) {
+        genterContainer.$(byText(value)).click();
+        }
         return  this;
     }
     public RegistrationPage typeUserNumber (String value) {

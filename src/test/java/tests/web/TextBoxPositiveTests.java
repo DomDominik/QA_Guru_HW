@@ -2,10 +2,7 @@ package tests.web;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import tests.data.RandomizTestData;
 import tests.pages.TexBoxPage;
 
@@ -23,6 +20,7 @@ public class TextBoxPositiveTests {
 
     }
     @Test
+    @DisplayName("Тест на простую форму -> заданные тестовые данные")
     void successRequiredFormTests() {
         texBoxPage
                 .openPege()
@@ -42,6 +40,7 @@ public class TextBoxPositiveTests {
         randomData = new RandomizTestData();
     }
     @Test
+    @DisplayName("Тест на простую форму -> рандомные тестовые данные")
     void successRandomRequiredFormTests() {
         texBoxPage
                 .openPege()
