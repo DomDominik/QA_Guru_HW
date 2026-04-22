@@ -34,6 +34,10 @@ public class ParametrizedRegistrationFormTests {
         Configuration.baseUrl = "https://demoqa.com/";
 
     }
+    @AfterEach
+    void teaDown() {
+        Selenide.closeWebDriver();
+    }
     @Tag("Web")
     @Tag("Smoke")
     @CsvSource({
@@ -108,9 +112,5 @@ public class ParametrizedRegistrationFormTests {
                 .checkResult("Gender", genterWrapper)
                 .checkResult("Mobile", userNumber)
                 .checkResult("State and City", country+" "+city);
-    }
-    @AfterAll
-    static void teaDown() {
-        Selenide.closeWebDriver();
     }
     }
