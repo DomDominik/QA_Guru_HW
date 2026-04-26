@@ -10,29 +10,41 @@ repositories {
 }
 
 dependencies {
-    testImplementation('org.junit.jupiter:junit-jupiter-api:5.9.3')
-    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.9.3')
-    testImplementation('org.junit.platform:junit-platform-launcher:1.9.3')
-    testImplementation('org.junit.jupiter:junit-jupiter-params:5.9.3')
+    // JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.11.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.0'
 
-    testImplementation('com.codeborne:selenide:7.15.0')
+    // Selenide для UI тестов
+    testImplementation 'com.codeborne:selenide:7.15.0'
 
-    implementation('org.slf4j:slf4j-api:2.0.17')
-    implementation('org.slf4j:slf4j-simple:2.0.17')
+    // Работа с CSV
+    testImplementation 'com.opencsv:opencsv:5.6'
 
-    implementation ('com.github.javafaker:javafaker:1.0.2')
+    // Тестирование PDF
+    testImplementation 'com.codeborne:pdf-test:1.8.0'
+
+    //Тестирование xls
+    testImplementation 'com.codeborne:xls-test:1.4.3'
+
+    // Генерация тестовых данных
+    testImplementation 'com.github.javafaker:javafaker:1.0.2'
+
+    // Логирование
+    testImplementation 'org.slf4j:slf4j-simple:2.0.17'
 }
 
 test {
     useJUnitPlatform()
+
     testLogging {
         events "passed", "skipped", "failed"
         showStandardStreams = true
+        exceptionFormat = 'full'
     }
-    useJUnitPlatform {
-        useJUnitPlatform()
 
-        // Позволяет передавать теги через -PincludeTags=...
-        systemProperty 'junit.jupiter.extensions.tagfilter.include', findProperty('includeTags') ?: 'none'
-        }
-    }
+    // Фильтрация тестов по тегам
+    systemProperty 'junit.jupiter.extensions.tagFilter.include',
+            findProperty('includeTags') ?: ''
+}
