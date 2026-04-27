@@ -28,6 +28,10 @@ dependencies {
     //Тестирование xls
     testImplementation 'com.codeborne:xls-test:1.4.3'
 
+    //Работа с JSON
+    testImplementation 'com.fasterxml.jackson.core:jackson-core:2.13.1'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
+
     // Генерация тестовых данных
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
 
