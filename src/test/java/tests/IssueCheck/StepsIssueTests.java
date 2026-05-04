@@ -1,0 +1,35 @@
+package tests.IssueCheck;
+
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Selectors.withText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+import static io.qameta.allure.Allure.step;
+import static org.openqa.selenium.By.linkText;
+
+public class StepsIssueTests {
+    @BeforeAll
+    static void setupAllure() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    @Test
+    public void stepsLambdaTests() {
+        step("Открываем главную страницу", () -> {
+            open("https://github.com/");
+        });
+
+        $( "qbsearch-input.search-input").click();
+        $( "#query-builder-test").sendKeys("theonion/comcastifyjs");
+        $( "#query-builder-test").submit();
+
+        $(linkText("theonion/comcastifyjs")).click();
+        $("#issues-repo-tab-count").click();
+        $(withText("27")).should(exist);
+    }
+}
