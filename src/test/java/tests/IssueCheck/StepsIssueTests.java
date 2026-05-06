@@ -3,6 +3,7 @@ package tests.IssueCheck;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.exist;
@@ -17,19 +18,43 @@ public class StepsIssueTests {
     static void setupAllure() {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
+    private final static String REPOSITORY = "theonion/comcastifyjs";
+    private final static String TEXT = "Data URI's are loading too fast";
+    private final static String ISSUES = "issues";
 
     @Test
+    @DisplayName("Лямбда шаги через step")
     public void stepsLambdaTests() {
         step("Открываем главную страницу", () -> {
             open("https://github.com/");
         });
-
-        $( "qbsearch-input.search-input").click();
-        $( "#query-builder-test").sendKeys("theonion/comcastifyjs");
-        $( "#query-builder-test").submit();
-
-        $(linkText("theonion/comcastifyjs")).click();
-        $("#issues-repo-tab-count").click();
-        $(withText("27")).should(exist);
+        step("Нажимаем на инпут поиска", () -> {
+            $( "qbsearch-input.search-input").click();
+        });
+        step("Вводим: " + REPOSITORY, () -> {
+            $( "#query-builder-test").sendKeys(REPOSITORY);
+        });
+        step("Жмем enter", () -> {
+            $( "#query-builder-test").submit();
+        });
+        step("В полученном списке выбираем " + REPOSITORY, () -> {
+            $(linkText(REPOSITORY)).click();
+        });
+        step("Переходим на вкладку " + ISSUES, () -> {
+            $("#issues-repo-tab-count").click();
+        });
+        step("Проверяем что есть " + ISSUES + " " + TEXT, () -> {
+            $(withText(TEXT)).should(exist);
+        });
+    }
+    @Test
+    @DisplayName("Шаги с аннотацией @Step")
+    public void stepAnnotatedTest(){
+        WebSteps steps = new WebSteps();
+        steps.openMainPage();
+        steps.searchRepo(REPOSITORY);
+        steps.chooseRepo(REPOSITORY);
+        steps.checkIssue(TEXT);
+        steps.takeScreenshot();
     }
 }

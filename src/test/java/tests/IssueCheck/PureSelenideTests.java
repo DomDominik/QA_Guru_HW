@@ -16,6 +16,7 @@ public class PureSelenideTests {
     }
 
     @Test
+    @DisplayName("Чистый Selenide")
     public void pureIssueTest() {
         open("https://github.com/");
         $( "qbsearch-input.search-input").click();
@@ -24,6 +25,6 @@ public class PureSelenideTests {
 
         $(linkText("theonion/comcastifyjs")).click();
         $("#issues-repo-tab-count").click();
-        $(withText("27")).should(exist);
+        $(withText("Data URI's are loading too fast")).should(exist);
     }
 }
