@@ -18,6 +18,8 @@ public class StepsIssueTests {
     static void setupAllure() {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
+    AllureReports allureReports = new AllureReports();
+    WebSteps steps = new WebSteps();
     private final static String REPOSITORY = "theonion/comcastifyjs";
     private final static String TEXT = "Data URI's are loading too fast";
     private final static String ISSUES = "issues";
@@ -50,11 +52,10 @@ public class StepsIssueTests {
     @Test
     @DisplayName("Шаги с аннотацией @Step")
     public void stepAnnotatedTest(){
-        WebSteps steps = new WebSteps();
         steps.openMainPage();
         steps.searchRepo(REPOSITORY);
         steps.chooseRepo(REPOSITORY);
         steps.checkIssue(TEXT);
-        steps.takeScreenshot();
+        allureReports.takeScreenshot();
     }
 }
