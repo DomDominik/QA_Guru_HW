@@ -1,5 +1,6 @@
 plugins {
-    id 'java'
+    id 'java-library'
+    id 'io.qameta.allure' version "3.1.0"
 }
 
 group = 'org.example'
@@ -7,6 +8,19 @@ version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+allure {
+    report {
+        version.set("2.19.0")
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set("2.19.0")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -37,6 +51,10 @@ dependencies {
 
     // Логирование
     testImplementation 'org.slf4j:slf4j-simple:2.0.17'
+
+    //Allure
+    implementation 'io.qameta.allure:allure-selenide:2.19.0'
+    testImplementation'io.qameta.allure:allure-junit5:2.19.0'
 }
 
 test {
