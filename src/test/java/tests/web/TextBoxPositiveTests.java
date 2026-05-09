@@ -15,7 +15,6 @@ public class TextBoxPositiveTests {
     @BeforeAll
     static void setUp() {
         Configuration.browserSize = "1920x1080";
-        Configuration.browser = "chrome";
         Configuration.baseUrl = "https://demoqa.com/";
 
     }
