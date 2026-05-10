@@ -17,6 +17,9 @@ public class RegistrationFormNegativeTests {
         static void setUp() {
             Configuration.browserSize = "1920x1080";
             Configuration.baseUrl = "https://demoqa.com/";
+            Configuration.browser ="Chrome";
+            Configuration.browserVersion = "128";
+            Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         }
 
         @Test
