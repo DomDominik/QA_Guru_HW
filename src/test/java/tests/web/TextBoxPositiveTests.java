@@ -19,8 +19,8 @@ public class TextBoxPositiveTests {
         Configuration.browser ="Chrome";
         Configuration.browserVersion = "128";
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-
     }
+
     @Test
     @DisplayName("Тест на простую форму -> заданные тестовые данные")
     void successRequiredFormTests() {
