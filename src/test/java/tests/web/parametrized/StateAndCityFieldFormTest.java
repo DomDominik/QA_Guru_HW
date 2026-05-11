@@ -79,15 +79,14 @@ public class StateAndCityFieldFormTest {
         });
     }
     @AfterEach
-    void reportsFacture() {
+    void reportsFactureAndTearDown() {
         Attachments.screenshotAs("Скриншот формы регистрации");
         Attachments.addVideo();
         Attachments.browserConsoleLogs();
         Attachments.getVideoUrl();
         Attachments.pageSource();
-    }
-    @AfterEach
-    void teaDown() {
+
         Selenide.closeWebDriver();
+        SelenideLogger.removeListener("allure");
     }
 }

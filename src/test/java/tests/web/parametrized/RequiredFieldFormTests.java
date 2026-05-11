@@ -36,7 +36,6 @@ public class RequiredFieldFormTests {
     void setupAllure() {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
-
     @Tag("Web")
     @Tag("Smoke")
     @CsvSource({
@@ -70,16 +69,15 @@ public class RequiredFieldFormTests {
             registrationPage.checkNotVisibleTableResponsive());
     }
     @AfterEach
-    void reportsFacture() {
+    void reportsFactureAndTearDown() {
         Attachments.screenshotAs("Скриншот формы регистрации");
         Attachments.addVideo();
         Attachments.browserConsoleLogs();
         Attachments.getVideoUrl();
         Attachments.pageSource();
-    }
-    @AfterEach
-    void teaDown() {
+
         Selenide.closeWebDriver();
+        SelenideLogger.removeListener("allure");
     }
 }
 
