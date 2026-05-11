@@ -7,13 +7,16 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import tests.helpers.Attachments;
 import tests.pages.RegistrationPage;
+
+import java.util.Map;
 
 import static com.codeborne.selenide.logevents.SelenideLogger.step;
 
 public class RequiredFieldFormTests {
     RegistrationPage registrationPage = new RegistrationPage();
-
 
     @BeforeAll
     static void setUp() {
@@ -21,12 +24,19 @@ public class RequiredFieldFormTests {
         Configuration.baseUrl = "https://demoqa.com/";
         Configuration.browser ="Chrome";
         Configuration.browserVersion = "128";
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
     @BeforeEach
     void setupAllure() {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
+
     @Tag("Web")
     @Tag("Smoke")
     @CsvSource({
@@ -58,6 +68,14 @@ public class RequiredFieldFormTests {
         });
         step("Проверяем видимость страницы регистрации", () ->
             registrationPage.checkNotVisibleTableResponsive());
+    }
+    @AfterEach
+    void reportsFacture() {
+        Attachments.screenshotAs("Скриншот формы регистрации");
+        Attachments.addVideo();
+        Attachments.browserConsoleLogs();
+        Attachments.getVideoUrl();
+        Attachments.pageSource();
     }
     @AfterAll
     static void teaDown() {
