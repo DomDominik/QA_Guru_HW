@@ -77,8 +77,8 @@ public class RequiredFieldFormTests {
         Attachments.getVideoUrl();
         Attachments.pageSource();
     }
-    @AfterAll
-    static void teaDown() {
+    @AfterEach
+    void teaDown() {
         Selenide.closeWebDriver();
     }
 }
