@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,15 +23,16 @@ public class StepsIssueTests {
         Configuration.browserVersion = "128";
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
-
-    static void setupAllure() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-    }
     AllureReports allureReports = new AllureReports();
     WebSteps steps = new WebSteps();
     private final static String REPOSITORY = "theonion/comcastifyjs";
     private final static String TEXT = "Data URI's are loading too fast";
     private final static String ISSUES = "issues";
+
+    @BeforeEach
+    void setupAllure() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
 
     @Test
     @DisplayName("Лямбда шаги через step")
