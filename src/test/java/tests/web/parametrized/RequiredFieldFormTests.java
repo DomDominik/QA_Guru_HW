@@ -1,18 +1,14 @@
 package tests.web.parametrized;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import tests.config.TestConfig;
 import tests.helpers.Attachments;
 import tests.pages.RegistrationPage;
-
-import java.util.Map;
 
 import static com.codeborne.selenide.logevents.SelenideLogger.step;
 
@@ -21,7 +17,7 @@ public class RequiredFieldFormTests {
 
     @BeforeAll
     static void setUp() {
-        TestConfig.applyConfiguration(); // ✅ читает все параметры из systemProperties
+        TestConfig.applyConfiguration();
     }
     @BeforeEach
     void setupAllure() {
