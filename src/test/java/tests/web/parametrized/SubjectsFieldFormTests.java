@@ -18,7 +18,6 @@ import static tests.data.TestData.userNumber;
 public class SubjectsFieldFormTests {
     RegistrationPage registrationPage = new RegistrationPage();
 
-    @Tag("Smoke")
     @BeforeAll
     static void setUp() {
         TestConfig.applyConfiguration();
@@ -27,6 +26,7 @@ public class SubjectsFieldFormTests {
     void setupAllure() {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
+    @Tag("Smoke")
     @DisplayName("Тесты на варианты Subjects")
     @ParameterizedTest(name = "[{index}] Тест с предметом: {0}")
     @EnumSource(Subject.class)

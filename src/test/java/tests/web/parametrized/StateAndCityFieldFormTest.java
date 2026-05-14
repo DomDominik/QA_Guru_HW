@@ -23,7 +23,6 @@ import static tests.data.TestData.userNumber;
 public class StateAndCityFieldFormTest {
     RegistrationPage registrationPage = new RegistrationPage();
 
-    @Tag("Smoke")
     @BeforeAll
     static void setUp() {
         TestConfig.applyConfiguration();
@@ -39,6 +38,7 @@ public class StateAndCityFieldFormTest {
                                 .map(city -> of(countryAndCity.getCountry(), city))
                 );
     }
+    @Tag("Smoke")
     @DisplayName("Тесты на варианты State and City")
     @ParameterizedTest(name = "Страна: {0}, Город: {1}")
     @MethodSource("countryAndCityProvider")
