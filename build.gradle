@@ -57,16 +57,34 @@ dependencies {
     testImplementation'io.qameta.allure:allure-junit5:2.19.0'
 }
 
+
 test {
     useJUnitPlatform()
 
+    // Проброс системных свойств
+    systemProperties = [
+            "base.url": System.getProperty("base.url", "https://demoqa.com"),
+            "remote.url": System.getProperty("remote.url", ""),
+            "headless": System.getProperty("headless", "false"),
+            "browser": System.getProperty("browser", "chrome"),
+            "browser.version": System.getProperty("browser.version", "latest"),
+            "resolution": System.getProperty("resolution", "1920x1080"),
+            "video.enabled": System.getProperty("video.enabled", "false"),
+            "selenide.remote": System.getProperty("selenide.remote"),
+            "allure.results.directory": file("build/allure-results").absolutePath
+    ]
+
+    // Фильтрация по тегам
+    String tags = System.getProperty("groups")
+    if (tags != null && !tags.isEmpty()) {
+        useJUnitPlatform {
+            includeTags(tags.split(",").collect { it.trim() } as String[])
+        }
+    }
+
     testLogging {
-        events "passed", "skipped", "failed"
+        events = ["passed", "failed", "skipped"]
         showStandardStreams = true
         exceptionFormat = 'full'
     }
-
-    // Фильтрация тестов по тегам
-    systemProperty 'junit.jupiter.extensions.tagFilter.include',
-            findProperty('includeTags') ?: ''
 }

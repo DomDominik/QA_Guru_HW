@@ -34,7 +34,7 @@ public class RegistrationPage {
 
     //Actions
     public RegistrationPage openPege () {
-        open("automation-practice-form");
+        open("/automation-practice-form");
 
         return  this;
     }

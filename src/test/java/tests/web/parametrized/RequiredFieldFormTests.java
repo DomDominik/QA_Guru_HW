@@ -8,6 +8,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import tests.config.TestConfig;
 import tests.helpers.Attachments;
 import tests.pages.RegistrationPage;
 
@@ -20,17 +21,7 @@ public class RequiredFieldFormTests {
 
     @BeforeAll
     static void setUp() {
-        Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://demoqa.com/";
-        Configuration.browser ="Chrome";
-        Configuration.browserVersion = "128";
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-        Configuration.browserCapabilities = capabilities;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        TestConfig.applyConfiguration(); // ✅ читает все параметры из systemProperties
     }
     @BeforeEach
     void setupAllure() {
